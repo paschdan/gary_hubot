@@ -29,11 +29,12 @@ querystring = require('querystring')
 module.exports = (robot) ->
 
   robot.router.post "/hubot/gh-pull-requests", (req, res) ->
-    console.log(req)
+    if req
+      console.log('Got request')
     query = querystring.parse(url.parse(req.url).query)
 
     res.end
-
+    console.log(res)
     user = {}
     user.room = query.room if query.room
     user.type = query.type if query.type
