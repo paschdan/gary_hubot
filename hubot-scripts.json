@@ -20,6 +20,5 @@
 "xkcd.coffee",
 "yell.coffee",
 "wunderground.coffee",
-"mongo-brain.coffee",
-"github-pull-request-notifier.coffee"
+"mongo-brain.coffee"
 ]
