@@ -29,12 +29,8 @@ querystring = require('querystring')
 module.exports = (robot) ->
 
   robot.router.post "/hubot/gh-pull-requests", (req, res) ->
-    if req
-      console.log('Got request')
     query = querystring.parse(url.parse(req.url).query)
 
-    res.end
-    console.log(res)
     user = {}
     user.room = query.room if query.room
     user.type = query.type if query.type
@@ -47,7 +43,7 @@ module.exports = (robot) ->
 
 
 announcePullRequest = (data, cb) ->
-  if data.action == 'opened'
+  if data.action in ['opened', 'closed']
     mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
 
     if mentioned
