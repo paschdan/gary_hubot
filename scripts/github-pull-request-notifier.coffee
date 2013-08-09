@@ -32,7 +32,7 @@ module.exports = (robot) ->
     query = querystring.parse(url.parse(req.url).query)
 
     res.send(200)
-    console.log "Request Body: #{req.body}"
+    console.log "Request Body: #{req.body.payload}"
     user = {}
     user.room = query.room if query.room
     user.type = query.type if query.type
@@ -46,7 +46,7 @@ module.exports = (robot) ->
 
 announcePullRequest = (data, cb) ->
   console.log(data)
-  if data.action in ['opened', 'closed']
+  if data.payload.action in ['opened', 'closed']
     mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
     console.log(mentioned)
     if mentioned
