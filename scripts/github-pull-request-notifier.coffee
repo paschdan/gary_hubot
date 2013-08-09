@@ -30,7 +30,7 @@ module.exports = (robot) ->
 
   robot.router.post "/hubot/gh-pull-requests", (req, res) ->
     query = querystring.parse(url.parse(req.url).query)
-
+    console.log(query)
     res.send(200)
 
     user = {}
