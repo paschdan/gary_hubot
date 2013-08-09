@@ -32,7 +32,7 @@ module.exports = (robot) ->
     query = querystring.parse(url.parse(req.url).query)
 
     res.send(200)
-    console.log "Request Body: #{req.body.payload}"
+
     user = {}
     user.room = query.room if query.room
     user.type = query.type if query.type
@@ -45,10 +45,9 @@ module.exports = (robot) ->
 
 
 announcePullRequest = (data, cb) ->
-  console.log(data)
   if data.payload.action in ['opened', 'closed']
-    mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
-    console.log(mentioned)
+    mentioned = data.payload.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
+
     if mentioned
       unique = (array) ->
         output = {}
@@ -62,4 +61,7 @@ announcePullRequest = (data, cb) ->
     else
       mentioned_line = ''
 
-    cb "New pull request \"#{data.pull_request.title}\" by #{data.pull_request.user.login}: #{data.pull_request.html_url}#{mentioned_line}"
+    if data.payload.action == 'opened'
+      cb "New pull request \"#{data.payload.pull_request.title}\" by #{data.payload..pull_request.user.login}: #{data.payload.pull_request.html_url}#{mentioned_line}"
+    if data.payload.action == 'closed'
+      cb "Pull request closed \"#{data.payload.pull_request.title}\" by #{data.payload.pull_request.merged_by.login}: #{data.payload.pull_request.html_url}"
