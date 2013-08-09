@@ -39,10 +39,10 @@ module.exports = (robot) ->
     console.log user.room
 
     try
-      announcePullRequest req.body.payload, (what) ->
+      announcePullRequest req.body, (what) ->
         robot.send user, what
     catch error
-      console.log "github pull request notifier error: #{error}. Request: #{req.body.payload}"
+      console.log "github pull request notifier error: #{error}. Request: #{req.body}"
 
 
 announcePullRequest = (data, cb) ->
