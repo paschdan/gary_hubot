@@ -4,7 +4,6 @@
 "deadline.coffee",
 "eval.coffee",
 "jira-issues.coffee",
-"github-pulls.coffee",
 "github-credentials.coffee",
 "ascii.coffee",
 "chat.coffee",
