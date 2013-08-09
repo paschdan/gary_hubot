@@ -36,7 +36,8 @@ module.exports = (robot) ->
     user = {}
     user.room = query.room if query.room
     user.type = query.type if query.type
-
+    console.log user.room
+    console.log req.body
     try
       announcePullRequest req.body.payload, (what) ->
         robot.send user, what
@@ -45,6 +46,9 @@ module.exports = (robot) ->
 
 
 announcePullRequest = (data, cb) ->
+  console.log data
+  console.log data.action
+  console.log data.pull_request
 
   if data.action in ['opened', 'closed']
     mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
@@ -63,6 +67,8 @@ announcePullRequest = (data, cb) ->
       mentioned_line = ''
 
     if data.action == 'opened'
+      console.log 'action was opened'
       cb "New pull request \"#{data.pull_request.title}\" by #{data.pull_request.user.login}: #{data.pull_request.html_url}#{mentioned_line}"
     if data.action == 'closed'
+      console.log 'action was closed'
       cb "Pull request closed \"#{data.pull_request.title}\" by #{data.pull_request.merged_by.login}: #{data.pull_request.html_url}"
