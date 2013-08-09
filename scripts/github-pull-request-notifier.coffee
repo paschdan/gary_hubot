@@ -38,15 +38,15 @@ module.exports = (robot) ->
     user.type = query.type if query.type
 
     try
-      announcePullRequest req.body.payload, (what) ->
+      announcePullRequest req.body, (what) ->
         robot.send user, what
     catch error
       console.log "github pull request notifier error: #{error}. Request: #{req.body}"
 
 
 announcePullRequest = (data, cb) ->
-  if data.action in ['opened', 'closed']
-    mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
+  if data.payload.action in ['opened', 'closed']
+    mentioned = data.payload.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
 
     if mentioned
       unique = (array) ->
@@ -61,7 +61,7 @@ announcePullRequest = (data, cb) ->
     else
       mentioned_line = ''
 
-    if data.action == 'opened'
-      cb "New pull request \"#{data.pull_request.title}\" by #{data.pull_request.user.login}: #{data.pull_request.html_url}#{mentioned_line}"
-    if data.action == 'closed'
-      cb "Pull request closed \"#{data.pull_request.title}\" by #{data.pull_request.merged_by.login}: #{data.pull_request.html_url}"
+    if data.payload.action == 'opened'
+      cb "New pull request \"#{data.payload.pull_request.title}\" by #{data.payload.pull_request.user.login}: #{data.payload.pull_request.html_url}#{mentioned_line}"
+    if data.payload.action == 'closed'
+      cb "Pull request closed \"#{data.payload.pull_request.title}\" by #{data.payload.pull_request.merged_by.login}: #{data.payload.pull_request.html_url}"
