@@ -65,4 +65,4 @@ module.exports = (robot) ->
           else
             mentioned_line = ''
 
-          msg.send "\t#{pull.title} - #{pull.user.login} - #{mentioned_line}: #{pull.html_url}"
+          msg.send "\t#{pull.title} - Opened By: #{pull.user.login} - #{mentioned_line}\n#{pull.html_url}"
