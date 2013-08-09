@@ -21,7 +21,7 @@
 #   POST /hubot/gh-pull-requests?room=<room>[&type=<type]
 #
 # Authors:
-#   spajus
+#   spajus, blarghmatey
 
 url = require('url')
 querystring = require('querystring')
@@ -39,16 +39,18 @@ module.exports = (robot) ->
     console.log user.room
 
     try
-      announcePullRequest req.body, (what) ->
+      announcePullRequest req.body.payload, (what) ->
         robot.send user, what
     catch error
-      console.log "github pull request notifier error: #{error}. Request: #{req.body}"
+      console.log "github pull request notifier error: #{error}. Request: #{req.body.payload}"
 
 
 announcePullRequest = (data, cb) ->
-  console.log data.payload.action
-  if data.payload.action in ['opened', 'closed']
-    mentioned = data.payload.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
+  console.log data.action
+  console.log data.pull_request
+
+  if data.action in ['opened', 'closed']
+    mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
 
     if mentioned
       unique = (array) ->
@@ -63,9 +65,9 @@ announcePullRequest = (data, cb) ->
     else
       mentioned_line = ''
 
-    if data.payload.action == 'opened'
+    if data.action == 'opened'
       console.log 'action was opened'
-      cb "New pull request \"#{data.payload.pull_request.title}\" by #{data.payload.pull_request.user.login}: #{data.payload.pull_request.html_url}#{mentioned_line}"
-    if data.payload.action == 'closed'
+      cb "New pull request \"#{data.pull_request.title}\" by #{data.pull_request.user.login}: #{data.pull_request.html_url}#{mentioned_line}"
+    if data.action == 'closed'
       console.log 'action was closed'
-      cb "Pull request closed \"#{data.payload.pull_request.title}\" by #{data.payload.pull_request.merged_by.login}: #{data.payload.pull_request.html_url}"
+      cb "Pull request closed \"#{data.pull_request.title}\" by #{data.pull_request.merged_by.login}: #{data.pull_request.html_url}"

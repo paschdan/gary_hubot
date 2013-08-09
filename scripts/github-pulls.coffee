@@ -19,8 +19,8 @@
 #   You can further filter pull request title by providing a reguar expression.
 #   For example, `show me hubot pulls with awesome fix`.
 #
-# Author:
-#   jingweno
+# Authors:
+#   jingweno, blarghmatey
 
 module.exports = (robot) ->
   github = require("githubot")(robot)
@@ -61,7 +61,7 @@ module.exports = (robot) ->
             mentioned = mentioned.map (nick) -> nick.trim()
             mentioned = unique mentioned
 
-            mentioned_line = "\nMentioned: #{mentioned.join(", ")}"
+            mentioned_line = "Mentioned: #{mentioned.join(", ")}"
           else
             mentioned_line = ''
 
