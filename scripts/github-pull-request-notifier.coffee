@@ -30,7 +30,7 @@ module.exports = (robot) ->
 
   robot.router.post "/hubot/gh-pull-requests", (req, res) ->
     query = querystring.parse(url.parse(req.url).query)
-    console.log(query)
+
     res.send(200)
 
     user = {}
@@ -45,9 +45,10 @@ module.exports = (robot) ->
 
 
 announcePullRequest = (data, cb) ->
+  console.log(data.action)
   if data.action in ['opened', 'closed']
     mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
-
+    console.log(mentioned)
     if mentioned
       unique = (array) ->
         output = {}
