@@ -38,20 +38,21 @@ module.exports = (robot) ->
     user.type = query.type if query.type
 
     try
-      announcePullRequest JSON.parse req.body.payload, (what) ->
-        robot.send user, what
+      announcePullRequest req.body.payload, (what) ->
+        # robot.send user, what
     catch error
       console.log "github pull request notifier error: #{error}. Request: #{req.body}"
 
 
 announcePullRequest = (data, cb) ->
-  console.log "Action: " + data.action
-  console.log "Pull Number: " + data.number
-  console.log "Request: " + data.pull_request
-  console.log "Sender: " + data.sender
+  json_data = JSON.parse data
+  console.log "Action: " + json_data.action
+  console.log "Pull Number: " + json_data.number
+  console.log "Request: " + json_data.pull_request
+  console.log "Sender: " + json_data.sender
 
-  if data.action in ['opened', 'reopened', 'closed']
-    mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
+  if json_data.action in ['opened', 'reopened', 'closed']
+    mentioned = json_data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
 
     if mentioned
       unique = (array) ->
@@ -66,9 +67,9 @@ announcePullRequest = (data, cb) ->
     else
       mentioned_line = ''
 
-    if data.action in ['opened', 'reopened']
+    if json_data.action in ['opened', 'reopened']
       console.log 'action was opened'
-      cb "New pull request \"#{data.pull_request.title}\" by #{data.pull_request.user.login}: #{data.pull_request.html_url}#{mentioned_line}"
-    if data.action == 'closed'
+      cb "New pull request \"#{json_data.pull_request.title}\" by #{json_data.pull_request.user.login}: #{json_data.pull_request.html_url}#{mentioned_line}"
+    if json_data.action == 'closed'
       console.log 'action was closed'
-      cb "Pull request closed \"#{data.pull_request.title}\" by #{data.pull_request.merged_by.login}: #{data.pull_request.html_url}"
+      cb "Pull request closed \"#{json_data.pull_request.title}\" by #{json_data.pull_request.merged_by.login}: #{json_data.pull_request.html_url}"
