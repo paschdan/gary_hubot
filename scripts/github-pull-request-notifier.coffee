@@ -72,6 +72,6 @@ announcePullRequest = (data, cb) ->
       cb "New pull request \"#{json_data.pull_request.title}\" by #{json_data.pull_request.user.login} for repository #{json_data.repo.name}: #{json_data.pull_request.html_url}#{mentioned_line}"
     if json_data.action == 'closed'
       # console.log 'action was closed'
-      action = if data.pull_request.merged_by then 'merged' else 'closed'
+      action = if json_data.pull_request.merged_by then 'merged' else 'closed'
       merged_by = if action == 'merged' then ' by ' + json_data.pull_request.merged_by.login else ''
       cb "Pull request #{action} \"#{json_data.pull_request.title}\"#{merged_by} for repository #{json_data.repo.name}: #{json_data.pull_request.html_url}"
