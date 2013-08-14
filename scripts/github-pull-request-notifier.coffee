@@ -46,10 +46,6 @@ module.exports = (robot) ->
 
 announcePullRequest = (data, cb) ->
   json_data = JSON.parse data
-  console.log json_data
-  # console.log "Action: " + json_data.action
-  # console.log "Pull Number: " + json_data.number
-  # console.log "Request: " + json_data.pull_request.title
 
   if json_data.action in ['opened', 'reopened', 'closed']
     mentioned = json_data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
@@ -68,10 +64,8 @@ announcePullRequest = (data, cb) ->
       mentioned_line = ''
 
     if json_data.action in ['opened', 'reopened']
-      # console.log 'action was opened'
       cb "New pull request \"#{json_data.pull_request.title}\" by #{json_data.pull_request.user.login} for repository #{json_data.repo.name}: #{json_data.pull_request.html_url}#{mentioned_line}"
     if json_data.action == 'closed'
-      # console.log 'action was closed'
       action = if json_data.pull_request.merged_by then 'merged' else 'closed'
       merged_by = if action == 'merged' then ' by ' + json_data.pull_request.merged_by.login else ''
       cb "Pull request #{action} \"#{json_data.pull_request.title}\"#{merged_by} for repository #{json_data.repo.name}: #{json_data.pull_request.html_url}"
