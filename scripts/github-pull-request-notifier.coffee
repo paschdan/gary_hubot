@@ -34,7 +34,7 @@ module.exports = (robot) ->
     res.send(200)
 
     user = {}
-    user.room = "58786_testing@conf.hipchat.com" # query.room if query.room
+    user.room = query.room if query.room
     user.type = query.type if query.type
 
     try
@@ -46,10 +46,9 @@ module.exports = (robot) ->
 
 announcePullRequest = (data, cb) ->
   json_data = JSON.parse data
-  console.log "Action: " + json_data.action
-  console.log "Pull Number: " + json_data.number
-  console.log "Request: " + json_data.pull_request
-  console.log "Sender: " + json_data.sender
+  # console.log "Action: " + json_data.action
+  # console.log "Pull Number: " + json_data.number
+  # console.log "Request: " + json_data.pull_request.title
 
   if json_data.action in ['opened', 'reopened', 'closed']
     mentioned = json_data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
