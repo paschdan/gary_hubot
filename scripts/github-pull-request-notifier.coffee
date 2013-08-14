@@ -34,12 +34,12 @@ module.exports = (robot) ->
     res.send(200)
 
     user = {}
-    user.room = query.room if query.room
+    user.room = "58786_testing@conf.hipchat.com" # query.room if query.room
     user.type = query.type if query.type
 
     try
       announcePullRequest req.body.payload, (what) ->
-        # robot.send user, what
+        robot.send user, what
     catch error
       console.log "github pull request notifier error: #{error}. Request: #{req.body}"
 
