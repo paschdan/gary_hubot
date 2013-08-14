@@ -38,7 +38,7 @@ module.exports = (robot) ->
     user.type = query.type if query.type
 
     try
-      announcePullRequest req.body.payload, (what) ->
+      announcePullRequest req.body.payload.pull_request, (what) ->
         robot.send user, what
     catch error
       console.log "github pull request notifier error: #{error}. Request: #{req.body}"
