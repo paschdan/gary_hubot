@@ -37,10 +37,8 @@ module.exports = (robot) ->
     user.room = query.room if query.room
     user.type = query.type if query.type
 
-    console.log req.get('Content-Type')
-
     try
-      announcePullRequest req.body.payload, (what) ->
+      announcePullRequest JSON.parse req.body.payload, (what) ->
         robot.send user, what
     catch error
       console.log "github pull request notifier error: #{error}. Request: #{req.body}"
