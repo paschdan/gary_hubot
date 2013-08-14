@@ -45,11 +45,14 @@ module.exports = (robot) ->
 
 
 announcePullRequest = (data, cb) ->
-  console.log data['action']
-  console.log data['pull_request']
+  console.log "Data: " + data
+  console.log "Action: " + data.action
+  console.log "Pull Number: " + data.number
+  console.log "Request: " + data.pull_request
+  console.log "Sender: " + data.sender
 
-  if data['action'] in ['opened', 'reopened', 'closed']
-    mentioned = data['pull_request'].body.match(/(^|\s)(@[\w\-]+)/g)
+  if data.action in ['opened', 'reopened', 'closed']
+    mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
 
     if mentioned
       unique = (array) ->
@@ -64,9 +67,9 @@ announcePullRequest = (data, cb) ->
     else
       mentioned_line = ''
 
-    if data['action'] in ['opened', 'reopened']
+    if data.action in ['opened', 'reopened']
       console.log 'action was opened'
-      cb "New pull request \"#{data['pull_request'].title}\" by #{data['pull_request'].user.login}: #{data['pull_request'].html_url}#{mentioned_line}"
-    if data['action'] == 'closed'
+      cb "New pull request \"#{data.pull_request.title}\" by #{data.pull_request.user.login}: #{data.pull_request.html_url}#{mentioned_line}"
+    if data.action == 'closed'
       console.log 'action was closed'
-      cb "Pull request closed \"#{data['pull_request'].title}\" by #{data['pull_request'].merged_by.login}: #{data['pull_request'].html_url}"
+      cb "Pull request closed \"#{data.pull_request.title}\" by #{data.pull_request.merged_by.login}: #{data.pull_request.html_url}"
