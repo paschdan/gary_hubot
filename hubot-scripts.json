@@ -19,5 +19,8 @@
 "xkcd.coffee",
 "yell.coffee",
 "wunderground.coffee",
-"mongo-brain.coffee"
+"mongo-brain.coffee",
+"jenkins-notifier.coffee",
+"pagerduty.coffee",
+"responders.coffee"
 ]
