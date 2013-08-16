@@ -22,5 +22,7 @@
 "mongo-brain.coffee",
 "jenkins-notifier.coffee",
 "pagerduty.coffee",
-"responders.coffee"
+"responders.coffee",
+"auth.coffee",
+"hipchat-api.coffee"
 ]
