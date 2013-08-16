@@ -38,13 +38,13 @@ module.exports = (robot) ->
     user.type = query.type if query.type
 
     try
-      announcePullRequest req.body.payload, (what) ->
+      announcePullRequest req.body.payload, robot, (what) ->
         robot.send user, what
     catch error
       console.log "github pull request notifier error: #{error}. Request: #{req.body}"
 
 
-announcePullRequest = (data, cb) ->
+announcePullRequest = (data, robot, cb) ->
   json_data = JSON.parse data
 
   if json_data.action in ['opened', 'reopened', 'closed']
