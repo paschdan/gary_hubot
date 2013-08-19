@@ -59,9 +59,9 @@ announcePullRequest = (data, robot, cb) ->
       mentioned = mentioned.map (nick) -> nick.trim()
       mentioned = unique mentioned
       users_in_brain = robot.brain.data.users
-      console.log users_in_brain
-      # mapped_mention = (user.mention_name for user in users_in_brain if user.githubLogin and "@#{user.githubLogin}" in mentioned)
-      # console.log mapped_mention
+      # console.log users_in_brain
+      mapped_mention = "@#{user_object.mention_name}" for user_id, user_object of users_in_brain when user_object.githubLogin and "@#{user_object.githubLogin}" in mentioned
+      console.log mapped_mention
       mentioned_line = "\nMentioned: #{mentioned.join(", ")}"
     else
       mentioned_line = ''
