@@ -22,7 +22,6 @@ module.exports = (robot) ->
     token = process.env.HUBOT_HIPCHAT_ADMIN_TOKEN    
     msg.http("https://api.hipchat.com/v1/rooms/list?format=json&auth_token=#{token}")
       .get() (err, res, body) ->
-        console.log JSON.parse body
         rooms = JSON.parse body
         robot.brain.set "hipchat", {rooms: rooms.rooms}
         msg.send "Room list updated in brain"
