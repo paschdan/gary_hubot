@@ -62,7 +62,6 @@ announcePullRequest = (data, robot, cb) ->
       mention_object = {}
       mention_object[mention] = mention for mention in mentioned
       mention_object["@#{user_object.githubLogin}"] = "@#{user_object.mention_name}" for user_id, user_object of users_in_brain when user_object.githubLogin and "@#{user_object.githubLogin}" in mentioned
-      # console.log mention_object
       mentioned_line = "\nMentioned: #{(mention for login, mention of mention_object).join(', ')}"
     else
       mentioned_line = ''
