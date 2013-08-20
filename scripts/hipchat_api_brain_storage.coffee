@@ -23,5 +23,6 @@ module.exports = (robot) ->
     msg.http("https://api.hipchat.com/v1/rooms/list?format=json&auth_token=#{token}")
       .get() (err, res, body) ->
         rooms = JSON.parse body
-        robot.brain.set "hipchat", {rooms: rooms.rooms}
+        robot.brain.data['hipchat'] = {rooms: []} unless robot.brain.data.hipchat
+        robot.brain.data.hipchat.rooms = rooms.rooms
         msg.send "Room list updated in brain"
