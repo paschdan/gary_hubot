@@ -18,11 +18,11 @@
 "working-on.coffee",
 "xkcd.coffee",
 "yell.coffee",
-"wunderground.coffee",
 "mongo-brain.coffee",
 "jenkins-notifier.coffee",
 "pagerduty.coffee",
 "responders.coffee",
 "auth.coffee",
-"hipchat-api.coffee"
+"hipchat-api.coffee",
+"weather.coffee"
 ]

@@ -24,5 +24,5 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         rooms = JSON.parse body
         robot.brain.data['hipchat'] = {rooms: []} unless robot.brain.data.hipchat
-        robot.brain.data.hipchat.rooms = rooms.rooms
+        robot.brain.data.hipchat['rooms'] = rooms.rooms
         msg.send "Room list updated in brain"
