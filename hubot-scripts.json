@@ -24,5 +24,6 @@
 "responders.coffee",
 "auth.coffee",
 "hipchat-api.coffee",
-"weather.coffee"
+"weather.coffee",
+"google.coffee"
 ]

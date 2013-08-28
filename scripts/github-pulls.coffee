@@ -60,8 +60,11 @@ module.exports = (robot) ->
 
             mentioned = mentioned.map (nick) -> nick.trim()
             mentioned = unique mentioned
-
-            mentioned_line = "Mentioned: #{mentioned.join(", ")}"
+            users_in_brain = robot.brain.data.users
+            mention_object = {}
+            mention_object[mention] = mention for mention in mentioned
+            mention_object["@#{user_object.githubLogin}"] = "@#{user_object.mention_name}" for user_id, user_object of users_in_brain when user_object.githubLogin and "@#{user_object.githubLogin}" in mentioned
+            mentioned_line = "\nMentioned: #{(mention for login, mention of mention_object).join(', ')}"
           else
             mentioned_line = ''
 
