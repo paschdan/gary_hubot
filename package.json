@@ -23,7 +23,9 @@
     "hubot": "~ 2.5.1",
     "hubot-scripts": ">= 2.4.2",
     "hubot-hipchat": "~2.5.1-5",
-    "ntwitter": "~0.5.0"
+    "ntwitter": "~0.5.0",
+    "soupselect": "~0.2.0",
+    "htmlparser": "~1.7.6"
   },
   "engines": {
     "node": ">= 0.8.x",
