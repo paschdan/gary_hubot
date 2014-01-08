@@ -43,7 +43,7 @@ module.exports = (robot) ->
       announcePullRequest req.body.payload, robot, (what) ->
         robot.send user, what
     catch error
-      console.log "github pull request notifier error: #{error}. Request: URL - #{req.url}\nBody - #{req.body}\nPayload - #{req.body.payload}"
+      console.log "github pull request notifier error: #{error}. Request: #{req}\nURL - #{req.url}\nBody - #{req.body}\nPayload - #{req.body.payload}"
 
 
 announcePullRequest = (data, robot, cb) ->
