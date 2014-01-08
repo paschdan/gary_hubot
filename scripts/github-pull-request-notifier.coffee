@@ -37,11 +37,13 @@ module.exports = (robot) ->
     user.room = query.room if query.room
     user.type = query.type if query.type
 
+    room_id = value.room_id for key, value of robot.brain.data.hipchat.rooms when value.xmpp_jid == user.room
+
     try
       announcePullRequest req.body.payload, robot, (what) ->
         robot.send user, what
     catch error
-      console.log "github pull request notifier error: #{error}. Request: #{req.body}"
+      console.log "github pull request notifier error: #{error}. Request: #{req}"
 
 
 announcePullRequest = (data, robot, cb) ->
