@@ -45,7 +45,7 @@ module.exports = (robot) ->
         robot.send user, what
     catch error
       console.log "github pull request notifier error: #{error}."
-      console.log "Request: #{JSON.parse req.body}\n\n#{util.inspect(req.body)}"
+      console.log "Request: #{JSON.parse req.body}\n\n#{util.inspect req.body}"
 
 
 announcePullRequest = (data, robot, cb) ->
