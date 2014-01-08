@@ -30,14 +30,14 @@ module.exports = (robot) ->
 
   robot.router.post "/hubot/gh-pull-requests", (req, res) ->
     query = querystring.parse(url.parse(req.url).query)
-    console.log "query: #{query}"
+    console.log "query: #{JSON.stringify query}"
     res.send(200)
 
     user = {}
     user.room = query.room if query.room
     user.type = query.type if query.type
 
-    console.log "user: #{user}"
+    console.log "user: #{JSON.stringify user}"
 
     room_id = value.room_id for key, value of robot.brain.data.hipchat.rooms when value.xmpp_jid == user.room
 
