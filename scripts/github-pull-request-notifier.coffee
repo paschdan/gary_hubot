@@ -45,8 +45,8 @@ module.exports = (robot) ->
     catch error
       console.log "github pull request notifier error: #{error}."
       console.log "Request: #{JSON.stringify req.body}"
-      console.log "Raw Request: #{JSON.parse req}"
-
+      console.log "Raw Request 1: #{req}"
+      console.log "Raw Request 2: #{JSON.stringify req}"
 
 announcePullRequest = (data, robot, cb) ->
   json_data = JSON.parse data
