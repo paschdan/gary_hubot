@@ -55,6 +55,7 @@ module.exports = (robot) ->
 
 announcePullRequest = (data, robot, cb) ->
   json_data = JSON.parse data
+  console.log "json_data: #{JSON.stringify json_data}"
 
   if json_data.action in ['opened', 'reopened', 'closed']
     mentioned = json_data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
