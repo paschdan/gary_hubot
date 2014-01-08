@@ -54,7 +54,12 @@ module.exports = (robot) ->
     catch error
       #console.log '---------------------------------'
       console.log "github pull request notifier error: #{error}."
-      #console.log "Request: #{JSON.stringify req.body}"
+      console.log "Request: #{JSON.stringify req.body}"
+      try
+        announcePullRequest req.body, robot, (what) ->
+        robot.send user, what
+      catch error2
+        console.log "inner error: #{error2}"
       #console.log '---------------------------------'
       #console.log "Raw Request 1: #{req}"
       #console.log "Raw Request 2: #{JSON.stringify req}"
