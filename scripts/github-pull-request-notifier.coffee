@@ -42,6 +42,12 @@ module.exports = (robot) ->
     room_id = value.room_id for key, value of robot.brain.data.hipchat.rooms when value.xmpp_jid == user.room
 
     console.log "room_id: #{room_id}"
+
+    try
+      console.log "Request: #{JSON.stringify req.body.payload}"
+    catch error
+      console.log "--- error: #{error}"
+
     try
       announcePullRequest req.body.payload, robot, (what) ->
         robot.send user, what
