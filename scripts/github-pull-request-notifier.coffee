@@ -25,6 +25,7 @@
 
 url = require('url')
 querystring = require('querystring')
+util = require('util')
 
 module.exports = (robot) ->
 
@@ -43,7 +44,7 @@ module.exports = (robot) ->
       announcePullRequest req.body.payload, robot, (what) ->
         robot.send user, what
     catch error
-      console.log "github pull request notifier error: #{error}. Request: #{util.inspect(req.body)}"
+      console.log "github pull request notifier error: #{error}. Request: #{req.body}"
 
 
 announcePullRequest = (data, robot, cb) ->
