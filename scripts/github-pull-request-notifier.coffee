@@ -30,25 +30,44 @@ module.exports = (robot) ->
 
   robot.router.post "/hubot/gh-pull-requests", (req, res) ->
     query = querystring.parse(url.parse(req.url).query)
-
+    console.log "query: #{JSON.stringify query}"
     res.send(200)
 
     user = {}
     user.room = query.room if query.room
     user.type = query.type if query.type
 
+    console.log "user: #{JSON.stringify user}"
+
     room_id = value.room_id for key, value of robot.brain.data.hipchat.rooms when value.xmpp_jid == user.room
+
+    console.log "room_id: #{room_id}"
+
+    try
+      console.log "Request: #{JSON.stringify req.body.payload}"
+    catch error
+      console.log "--- error: #{error}"
 
     try
       announcePullRequest req.body.payload, robot, (what) ->
         robot.send user, what
     catch error
+      #console.log '---------------------------------'
       console.log "github pull request notifier error: #{error}."
       console.log "Request: #{JSON.stringify req.body}"
-
+      try
+        announcePullRequest req.body, robot, (what) ->
+        robot.send user, what
+      catch error2
+        console.log "inner error: #{error2}"
+      #console.log '---------------------------------'
+      #console.log "Raw Request 1: #{req}"
+      #console.log "Raw Request 2: #{JSON.stringify req}"
 
 announcePullRequest = (data, robot, cb) ->
   json_data = JSON.parse data
+  console.log '---------------------'
+  console.log "json_data: #{json_data}"
 
   if json_data.action in ['opened', 'reopened', 'closed']
     mentioned = json_data.pull_request.body.match(/(^|\s)(@[\w\-]+)/g)
