@@ -26,6 +26,5 @@
 "hipchat-api.coffee",
 "weather.coffee",
 "google.coffee",
-"bookmark.coffee",
-"http-info.coffee"
+"factoid.coffee"
 ]
