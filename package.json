@@ -32,6 +32,7 @@
     "cleverbot-node": "0.1.1",
     "moment": "1.6.2",
     "xml2js": "0.1.14"
+    "aws2js": "~0.8.3"
   },
   "engines": {
     "node": ">= 0.8.x",

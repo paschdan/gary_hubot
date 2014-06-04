@@ -27,4 +27,5 @@
 "weather.coffee",
 "google.coffee",
 "factoid.coffee"
+"aws.coffee"
 ]

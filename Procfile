@@ -1,1 +1,1 @@
-web: bin/hubot -a hipchat -n Gary
+web: bin/hubot -a hipchat -n digi -l digi

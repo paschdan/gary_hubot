@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Description:
 #   Auth allows you to assign roles to users which can be used by other scripts
 #   to restrict access to Hubot commands
