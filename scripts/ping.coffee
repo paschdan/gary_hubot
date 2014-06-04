@@ -7,6 +7,8 @@
 #   hubot time - Reply with current time
 #   hubot die - End hubot process
 
+Util = require('util')
+
 module.exports = (robot) ->
   robot.respond /PING$/i, (msg) ->
     msg.send "PONG"
@@ -18,6 +20,14 @@ module.exports = (robot) ->
     msg.send "Server time is: #{new Date()}"
 
   robot.respond /DIE$/i, (msg) ->
-    msg.send "Goodbye, cruel world."
-    process.exit 0
-
+    msg.send robot.auth.hasRole(msg.envelope.user, 'admin')
+    if robot.auth.hasRole(msg.envelope.user,'admin')
+      msg.send "Goodbye, cruel world."
+      process.exit 0
+    else
+     msg.send "Only admins can kill me."
+    
+  robot.respond /ROLES$/i, (msg) ->
+    user = msg.envelope.user
+    output = Util.inspect(user, false, 4)
+    msg.send output
