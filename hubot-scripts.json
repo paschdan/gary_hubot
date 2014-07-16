@@ -14,5 +14,6 @@
 "hipchat-api.coffee",
 "weather.coffee",
 "google.coffee",
-"aws.coffee"
+"aws.coffee",
+"github-status.coffee"
 ]
